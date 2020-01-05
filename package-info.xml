@@ -28,7 +28,7 @@
 		<remove-file name="$themes_dir/default/SolveTopic-Display.template.php" />
 	</uninstall>	
 
-	<install for="2.1 Beta 3, 2.1 Beta 4, 2.1 RC1">
+	<install for="2.1 RC2, 2.1 RC3, 2.1-2.1.99">
 		<readme type="file" parsebbc="true">readme.txt</readme>	
 		<modification>english.xml</modification>
 		<require-file name="SolveTopic.php" destination="$sourcedir" />
@@ -59,7 +59,7 @@
 		<hook function="integrate_moderate_areas_solveTopic" hook="integrate_moderate_areas" file="$sourcedir/SolveTopic-Admin.php" />
 		<hook function="integrate_viewModLog_solveTopic" hook="integrate_viewModLog" file="$sourcedir/SolveTopic-Admin.php" />
 	</install>
-	<uninstall for="2.1 Beta 3, 2.1 Beta 4, 2.1 RC1">
+	<uninstall for="2.1 RC2, 2.1 RC3, 2.1-2.1.99">
 		<database>uninstall-optional.php</database>
 		<readme type="inline">This will uninstall the Topic Solved Mod. Thanks for using this customization.</readme>			
 		<modification reverse="true">english.xml</modification>
