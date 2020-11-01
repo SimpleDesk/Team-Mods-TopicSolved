@@ -19,7 +19,11 @@ function add_ts_adminmenu(&$admin_areas)
 
 	// If this is 2.1, we don't check admin_features
 	if (function_exists('loadCacheAccelerator'))
+	{
+		loadLanguage('SolveTopic');
+
 		$admin_areas['maintenance']['areas']['logs']['subsections']['solvelog'] = array($txt['modlog_solve_log'], 'moderate_forum', 'enabled' => !empty($modSettings['enable_solved_log']), 'url' => $scripturl . '?action=moderate;area=solvelog');
+	}
 	else
 		$admin_areas['maintenance']['areas']['logs']['subsections']['solvelog'] = array($txt['modlog_solve_log'], 'moderate_forum', 'enabled' => !empty($modSettings['enable_solved_log']) && in_array('ml', $context['admin_features']), 'url' => $scripturl . '?action=moderate;area=modlog;sa=solvelog');
 	$admin_areas['config']['areas']['modsettings']['subsections']['topicsolved'] = array($txt['topic_solved_title']);
@@ -28,7 +32,9 @@ function add_ts_adminmenu(&$admin_areas)
 function ModifyTopicSolvedSettings($return_config = false)
 {
 	global $txt, $scripturl, $context, $settings, $sc, $modSettings, $smcFunc;
-	
+
+	loadLanguage('SolveTopic');
+
 	$query = $smcFunc['db_query']('', '
 		SELECT id_board, id_cat, child_level, name FROM {db_prefix}boards ORDER BY board_order ASC
 	');
@@ -89,6 +95,8 @@ function ModifyTopicSolvedSettings($return_config = false)
 function integrate_viewModLog_solveTopic(&$listOptions, &$moderation_menu_name)
 {
 	global $context, $modSettings, $scripturl, $txt, $settings, $smcFunc;
+
+	loadLanguage('SolveTopic');
 
 	// Topic solved log
 	$context['log_type'] = isset($_REQUEST['sa']) && $_REQUEST['sa'] == 'solvelog' ? 4 : $context['log_type'];
@@ -177,6 +185,8 @@ function integrate_viewModLog_solveTopic(&$listOptions, &$moderation_menu_name)
 function integrate_moderate_areas_solveTopic(&$menuData)
 {
 	global $modSettings, $txt, $scripturl;
+
+	loadLanguage('SolveTopic');
 
 	$menuData['logs']['areas']['solvelog'] = array(
 		'enabled' => !empty($modSettings['enable_solved_log']),

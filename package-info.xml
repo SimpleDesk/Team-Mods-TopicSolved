@@ -6,36 +6,36 @@
 	<version>1.1</version>
 	<type>modification</type>
 	<install for="2.0-2.0.99">
-		<readme type="file" parsebbc="true">readme.txt</readme>	
-		<modification>install2.0.xml</modification>
-		<modification>english.xml</modification>
-		<require-file name="SolveTopic.php" destination="$sourcedir" />
-		<require-file name="SolveTopic-Admin.php" destination="$sourcedir" />
-		<require-file name="solved.gif" destination="$imagesdir/post" />
-		<require-file name="SolveTopic-Display.template.php" destination="$themes_dir/default" />
-		<database>install-2.0.php</database>
+		<readme type="file" parsebbc="true">readme/readme-install.english.txt</readme>	
+		<modification>install/install2.0.xml</modification>
+		<modification>language/english.xml</modification>
+		<require-file name="sources/SolveTopic.php" destination="$sourcedir" />
+		<require-file name="sources/SolveTopic-Admin.php" destination="$sourcedir" />
+		<require-file name="images/solved.gif" destination="$imagesdir/post" />
+		<require-file name="templates/SolveTopic-Display.template.php" destination="$themes_dir/default" />
+		<database>install/install-2.0.php</database>
 		<redirect url="?action=admin;area=modsettings;sa=topicsolved" />
 	</install>
 	<uninstall for="2.0-2.0.99">
-		<database>uninstall-optional.php</database>
-		<code>uninstall-required-2.0.php</code>
-		<readme type="inline">This will uninstall the Topic Solved Mod. Thanks for using this customization.</readme>			
-		<modification reverse="true">install2.0.xml</modification>	
-		<modification reverse="true">english.xml</modification>
+		<database>install/uninstall-optional.php</database>
+		<code>install/uninstall-required-2.0.php</code>
+		<readme type="file" parsebbc="true">readme/readme-uninstall.english.txt</readme>	
+		<modification reverse="true">install/install2.0.xml</modification>	
+		<modification reverse="true">language/english.xml</modification>
 		<remove-file name="$sourcedir/SolveTopic.php" />
 		<remove-file name="$sourcedir/SolveTopic-Admin.php" />
 		<remove-file name="$imagesdir/post/solved.gif" />
 		<remove-file name="$themes_dir/default/SolveTopic-Display.template.php" />
 	</uninstall>	
 
-	<install for="2.1 RC2, 2.1 RC3, 2.1-2.1.99">
-		<readme type="file" parsebbc="true">readme.txt</readme>	
-		<modification>english.xml</modification>
-		<require-file name="SolveTopic.php" destination="$sourcedir" />
-		<require-file name="SolveTopic-Admin.php" destination="$sourcedir" />
-		<require-file name="solved.png" destination="$imagesdir/post" />
-		<require-file name="SolveTopic-Display.template.php" destination="$themes_dir/default" />
-		<database>install-2.1.php</database>
+	<install for="2.1 RC3, 2.1 RC4, 2.1-2.1.99">
+		<readme type="file" parsebbc="true">readme/readme-install.english.txt</readme>	
+		<require-file name="sources/SolveTopic.php" destination="$sourcedir" />
+		<require-file name="sources/SolveTopic-Admin.php" destination="$sourcedir" />
+		<require-file name="images/solved.png" destination="$imagesdir/post" />
+		<require-file name="templates/SolveTopic-Display.template.php" destination="$themes_dir/default" />
+		<require-file name="language/SolveTopic.english.php" destination="$themes_dir/default/languages" />
+		<database>install/install-2.1.php</database>
 		<redirect url="?action=admin;area=modsettings;sa=topicsolved" />
 
 		<!-- Core Startup -->
@@ -59,14 +59,15 @@
 		<hook function="integrate_moderate_areas_solveTopic" hook="integrate_moderate_areas" file="$sourcedir/SolveTopic-Admin.php" />
 		<hook function="integrate_viewModLog_solveTopic" hook="integrate_viewModLog" file="$sourcedir/SolveTopic-Admin.php" />
 	</install>
-	<uninstall for="2.1 RC2, 2.1 RC3, 2.1-2.1.99">
-		<database>uninstall-optional.php</database>
-		<readme type="inline">This will uninstall the Topic Solved Mod. Thanks for using this customization.</readme>			
+	<uninstall for="2.1 RC3, 2.1 RC4, 2.1-2.1.99">
+		<database>install/uninstall-optional.php</database>
+		<readme type="file" parsebbc="true">readme/readme-uninstall.english.txt</readme>	
 		<modification reverse="true">english.xml</modification>
 		<remove-file name="$sourcedir/SolveTopic.php" />
 		<remove-file name="$sourcedir/SolveTopic-Admin.php" />
 		<remove-file name="$imagesdir/post/solved.png" />
 		<remove-file name="$themes_dir/default/SolveTopic-Display.template.php" />
+		<remove-file name="$themes_dir/default/language/SolveTopic.english.php" />
 
 		<!-- Core Startup -->
 		<hook function="integrate_pre_load_solveTopic" hook="integrate_pre_load" file="$sourcedir/SolveTopic.php" reverse="true" />

@@ -30,6 +30,8 @@ function SolveTopic()
 {
 	global $topic, $user_info, $sourcedir, $board, $smcFunc, $modSettings;
 
+	loadLanguage('SolveTopic');
+
 	// See if its enabled in this board.
 	$solve_boards = array();
 	$boardsettings = array_keys($modSettings);
@@ -119,6 +121,8 @@ function integrate_display_buttons_solveTopic(&$buttons)
 {
 	global $modSettings, $context, $board, $scripturl;
 
+	loadLanguage('SolveTopic');
+
 	// Can you solve this?
 	$context['can_solve'] = allowedTo('solve_topic_any') || ($context['user']['started'] && allowedTo('solve_topic_own'));
 		
@@ -193,6 +197,8 @@ function integrate_message_index_solveTopic(&$message_index_selects, &$message_i
 function integrate_messageindex_buttons_solveTopic(&$buttons)
 {
 	global $context, $modSettings, $board;
+
+	loadLanguage('SolveTopic');
 
 	// Is this board solvable?
 	$context['board_solve'] = !empty($modSettings['topicsolved_board_' . $board]);
