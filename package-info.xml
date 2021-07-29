@@ -28,7 +28,7 @@
 		<remove-file name="$themes_dir/default/SolveTopic-Display.template.php" />
 	</uninstall>	
 
-	<install for="2.1 RC3, 2.1 RC4, 2.1-2.1.99">
+	<install for="2.1 RC4, 2.1-2.1.99">
 		<readme type="file" parsebbc="true">readme/readme-install.english.txt</readme>	
 		<require-file name="sources/SolveTopic.php" destination="$sourcedir" />
 		<require-file name="sources/SolveTopic-Admin.php" destination="$sourcedir" />
@@ -59,7 +59,7 @@
 		<hook function="integrate_moderate_areas_solveTopic" hook="integrate_moderate_areas" file="$sourcedir/SolveTopic-Admin.php" />
 		<hook function="integrate_viewModLog_solveTopic" hook="integrate_viewModLog" file="$sourcedir/SolveTopic-Admin.php" />
 	</install>
-	<uninstall for="2.1 RC3, 2.1 RC4, 2.1-2.1.99">
+	<uninstall for="2.1 RC4, 2.1-2.1.99">
 		<database>install/uninstall-optional.php</database>
 		<readme type="file" parsebbc="true">readme/readme-uninstall.english.txt</readme>	
 		<modification reverse="true">english.xml</modification>
