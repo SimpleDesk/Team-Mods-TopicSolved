@@ -95,7 +95,7 @@ function SolveTopic()
 		logAction(empty($solved) ? 'solve' : 'unsolve', array('topic' => $topic, 'board' => $board, 'member' => $starter),'solve');
 
 	// Let's go back home.
-	redirectexit('topic=' . $topic . '.' . $_REQUEST['start'] . (WIRELESS ? ';moderate' : ''));
+	redirectexit('topic=' . $topic . '.' . $_REQUEST['start']);
 }
 
 /**
@@ -210,7 +210,7 @@ function integrate_messageindex_buttons_solveTopic(&$buttons)
 
 		// Is it solved?
 		if ($context['topics'][$topic_data['id']]['is_solved'])
-			$context['topics'][$topic_data['id']]['css_class'] = 'solvedbg';
+			$context['topics'][$topic_data['id']]['css_class'] = 'windowbg solvedbg';
 	}
 
 	// Do we have a custom CSS?
