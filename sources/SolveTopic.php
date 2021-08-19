@@ -138,13 +138,15 @@ function integrate_display_buttons_solveTopic(&$buttons)
 	if (!empty($modSettings['topicsolved_display_notice']) && $context['topicinfo']['solved'] && $context['board_solve'])
 		$context['template_layers'][] = 'topicsolved_header';
 
-	$context['mod_buttons']['solve'] = array(
-		'test' => 'can_solve',
-		'text' => empty($context['topicinfo']['solved']) ? 'solve_topic' : 'unsolve_topic',
-		'image' => empty($context['topicinfo']['solved']) ? 'solve.gif' : 'unsolve.gif',
-		'lang' => true,
-		'url' => $scripturl . '?action=solve;topic=' . $context['current_topic'] . '.' . $context['start'] . ';' . $context['session_var'] . '=' . $context['session_id']
-	);
+	// SMF 2.1 will still display the moderation menu in mobile mode because this can cause a non empty array that is filtred later by template_button_strip.
+	if ($context['can_solve'])
+		$context['mod_buttons']['solve'] = array(
+			'test' => 'can_solve',
+			'text' => empty($context['topicinfo']['solved']) ? 'solve_topic' : 'unsolve_topic',
+			'image' => empty($context['topicinfo']['solved']) ? 'solve.gif' : 'unsolve.gif',
+			'lang' => true,
+			'url' => $scripturl . '?action=solve;topic=' . $context['current_topic'] . '.' . $context['start'] . ';' . $context['session_var'] . '=' . $context['session_id']
+		);
 }
 
 /**
