@@ -1,4 +1,9 @@
 <?php
+/**********************************************************************************
+* SolveTopic-Admin.php                                                                                                                                                                              *
+***********************************************************************************
+* Topic Solved mod for SMF 2.1, by SimpleDesk - www.simpledesk.net                                                                            *
+**********************************************************************************/
 
 if (!defined('SMF'))
 	die('Hacking attempt...');
@@ -75,6 +80,10 @@ function ModifyTopicSolvedSettings($return_config = false)
 	{
 		checkSession();
 
+		// Ensure we use the compatible 2.1 method of enabling a log, incase anywhere in the code it expecs it.
+		$config_vars[] = array('check', 'solvelog_enabled');
+		$_POST['solvelog_enabled'] = !empty($_POST['enable_solved_log']);
+
 		$save_vars = $config_vars;
 		saveDBSettings($save_vars);
 		
@@ -98,8 +107,11 @@ function integrate_viewModLog_solveTopic(&$listOptions, &$moderation_menu_name)
 
 	loadLanguage('SolveTopic');
 
-	// Topic solved log
-	$context['log_type'] = isset($_REQUEST['sa']) && $_REQUEST['sa'] == 'solvelog' ? 4 : $context['log_type'];
+	// Topic solved log.
+	if (function_exists('loadCacheAccelerator'))
+		$context['log_type'] = isset($_REQUEST['area']) && $_REQUEST['area'] == 'solvelog' ? 4 : $context['log_type'];
+	else
+		$context['log_type'] = isset($_REQUEST['sa']) && $_REQUEST['sa'] == 'solvelog' ? 4 : $context['log_type'];
 	
 	// Make sure the solve log is enabled.
 	if ($context['log_type'] == 4 && empty($modSettings['enable_solved_log']))
@@ -119,7 +131,11 @@ function integrate_viewModLog_solveTopic(&$listOptions, &$moderation_menu_name)
 	);
 
 	// Fix up the list options.
-	$listOptions['title'] = '<a href="' . $scripturl . '?action=helpadmin;help=solve_log_help" onclick="return reqWin(this.href);" class="help"><img src="' . $settings['images_url'] . '/helptopics.gif" alt="' . $txt['help'] . '" align="top" /></a> ' . $txt['modlog_solve_log'];
+	if (function_exists('loadCacheAccelerator'))
+		$listOptions['title'] = $txt['modlog_solve_log'];
+	else
+		$listOptions['title'] = '<a href="' . $scripturl . '?action=helpadmin;help=solve_log_help" onclick="return reqWin(this.href);" class="help"><img src="' . $settings['images_url'] . '/helptopics.gif" alt="' . $txt['help'] . '" align="top" /></a> ' . $txt['modlog_solve_log'];
+
 	$listOptions['additional_rows'][0]['value'] = '
 					' . $txt['modlog_search'] . ' (' . $txt['modlog_by'] . ': ' . $context['search']['label'] . '):
 					<input type="text" name="search" size="18" value="' . $smcFunc['htmlspecialchars']($context['search']['string']) . '">
@@ -195,6 +211,11 @@ function integrate_moderate_areas_solveTopic(&$menuData)
 		'function' => 'ViewModlog',
 		'custom_url' => $scripturl . '?action=moderate;area=solvelog',
 	);
+}
+
+function integrate_helpadmin_solveTopic()
+{
+	loadLanguage('SolveTopic');
 }
 
 ?>

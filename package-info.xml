@@ -58,6 +58,7 @@
 		<hook function="add_ts_permissions" hook="integrate_load_permissions" file="$sourcedir/SolveTopic-Admin.php" />
 		<hook function="integrate_moderate_areas_solveTopic" hook="integrate_moderate_areas" file="$sourcedir/SolveTopic-Admin.php" />
 		<hook function="integrate_viewModLog_solveTopic" hook="integrate_viewModLog" file="$sourcedir/SolveTopic-Admin.php" />
+		<hook function="integrate_helpadmin_solveTopic" hook="integrate_helpadmin" file="$sourcedir/SolveTopic-Admin.php" />
 	</install>
 	<uninstall for="2.1-2.1.99">
 		<database>install/uninstall-optional.php</database>
@@ -89,6 +90,7 @@
 		<hook function="add_ts_permissions" hook="integrate_load_permissions" file="$sourcedir/SolveTopic.php" reverse="true" />
 		<hook function="integrate_moderate_areas_solveTopic" hook="integrate_moderate_areas" file="$sourcedir/SolveTopic.php" reverse="true" />
 		<hook function="integrate_viewModLog_solveTopic" hook="integrate_viewModLog" file="$sourcedir/SolveTopic-Admin.php" reverse="true" />
+		<hook function="integrate_helpadmin_solveTopic" hook="integrate_helpadmin" file="$sourcedir/SolveTopic-Admin.php" reverse="true" />
 	</uninstall>	
 
 </package-info>
